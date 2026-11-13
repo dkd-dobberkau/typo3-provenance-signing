@@ -1,0 +1,33 @@
+{
+    "name": "cms-provenance/provenance-signing",
+    "type": "typo3-cms-extension",
+    "description": "Ed25519 signatures for published content, with key generation and rotation.",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://cms-provenance.org",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "provenance",
+        "content-provenance",
+        "json-ld"
+    ],
+    "support": {
+        "issues": "https://github.com/dkd-dobberkau/typo3-provenance-signing/issues",
+        "source": "https://github.com/dkd-dobberkau/typo3-provenance-signing"
+    },
+    "require": {
+        "php": "^8.2",
+        "typo3/cms-core": "^13.4 || ^14.0",
+        "cms-provenance/provenance": "^0.1@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "CmsProvenance\\ProvenanceSigning\\": "Classes/"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "provenance_signing"
+        }
+    }
+}
