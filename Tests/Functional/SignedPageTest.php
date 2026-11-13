@@ -61,6 +61,23 @@ final class SignedPageTest extends FunctionalTestCase
     }
 
     #[Test]
+    public function signedRecordIsStoredForTheAuditEndpoint(): void
+    {
+        (new KeyStore($this->keyDirectory))->generate();
+        $delivered = $this->extractRecord($this->fetch('/'));
+
+        $row = $this->getConnectionPool()->getConnectionForTable('tx_provenancesigning_record')
+            ->select(['*'], 'tx_provenancesigning_record', ['page_uid' => 1, 'language_uid' => 0])
+            ->fetchAssociative();
+
+        self::assertIsArray($row);
+        self::assertSame($delivered->contentHash, $row['content_hash']);
+        self::assertSame($delivered->signature->keyId, $row['key_id']);
+        self::assertSame('urn:uuid:7c2f0e1a-0000-4000-8000-000000000001', $row['document_uri']);
+        self::assertEquals($delivered, json_decode($row['signed_record'], false, 512, JSON_THROW_ON_ERROR));
+    }
+
+    #[Test]
     public function keyDocumentPublishesThePublicKeyAsJwk(): void
     {
         $key = (new KeyStore($this->keyDirectory))->generate();

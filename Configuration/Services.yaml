@@ -6,7 +6,7 @@ services:
 
   CmsProvenance\ProvenanceSigning\:
     resource: '../Classes/*'
-    exclude: '../Classes/{Key/SigningKey.php,Key/KeyStoreException.php}'
+    exclude: '../Classes/{Key/SigningKey.php,Key/KeyStoreException.php,Signing/SignedPage.php}'
 
   CmsProvenance\ProvenanceSigning\Key\KeyStore:
     factory: ['@CmsProvenance\ProvenanceSigning\Key\KeyStoreFactory', 'create']

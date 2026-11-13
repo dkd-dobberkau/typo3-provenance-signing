@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- The latest signed record per page and language is stored in
+  `tx_provenancesigning_record` for the audit endpoint.
 - Signing of the page provenance record (milestone M4): canonical text and
   content hash per Annex A, JCS record canonicalisation, Ed25519 signature,
   written into the cached page. Passes the conformance vectors byte for byte.

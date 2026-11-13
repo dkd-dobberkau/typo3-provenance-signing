@@ -32,10 +32,19 @@ final readonly class PageSigner
      */
     public function signHtml(string $html, string $keyBaseUrl): string
     {
+        return $this->signPage($html, $keyBaseUrl)?->html ?? $html;
+    }
+
+    /**
+     * @param string $keyBaseUrl URL prefix under which a key document is published, ending with "/"
+     * @return SignedPage|null null when the page cannot or need not be signed
+     */
+    public function signPage(string $html, string $keyBaseUrl): ?SignedPage
+    {
         $records = $this->findProvenanceRecords($html);
         $key = $this->keyStore->activeKey();
         if (count($records) !== 1 || $key === null) {
-            return $html;
+            return null;
         }
 
         [$fullMatch, $record] = $records[0];
@@ -50,7 +59,10 @@ final readonly class PageSigner
             JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_THROW_ON_ERROR
         );
 
-        return str_replace($fullMatch, '<script type="application/ld+json">' . $json . '</script>', $html);
+        return new SignedPage(
+            str_replace($fullMatch, '<script type="application/ld+json">' . $json . '</script>', $html),
+            $signed
+        );
     }
 
     /**

@@ -4,16 +4,20 @@ declare(strict_types=1);
 
 namespace CmsProvenance\ProvenanceSigning\EventListener;
 
-use CmsProvenance\ProvenanceSigning\Signing\PageSigner;
+use CmsProvenance\ProvenanceSigning\Domain\Repository\SignedRecordRepository;
 use CmsProvenance\ProvenanceSigning\Middleware\PublicKeyEndpoint;
+use CmsProvenance\ProvenanceSigning\Signing\PageSigner;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
+use TYPO3\CMS\Frontend\Page\PageInformation;
 
 /**
  * Signs the provenance record once the page HTML is complete and before it is
  * cached, so every delivery of the cached page carries a matching signature.
+ * The signed record is also stored for the audit endpoint.
  *
  * Non-cacheable (USER_INT) output is inserted after this point. It must stay
  * outside the content roots or be marked with data-cps-ignore, otherwise the
@@ -24,6 +28,7 @@ final readonly class SignPageContent
 {
     public function __construct(
         private PageSigner $pageSigner,
+        private SignedRecordRepository $signedRecordRepository,
         private LoggerInterface $logger,
     ) {}
 
@@ -36,10 +41,29 @@ final readonly class SignPageContent
         $keyBaseUrl = rtrim((string)$site->getBase()->withPath(''), '/') . PublicKeyEndpoint::PATH . '/';
 
         try {
-            $this->setContent($event, $this->pageSigner->signHtml($this->getContent($event), $keyBaseUrl));
+            $signedPage = $this->pageSigner->signPage($this->getContent($event), $keyBaseUrl);
+            if ($signedPage === null) {
+                return;
+            }
+            $this->setContent($event, $signedPage->html);
+            $this->storeForAudit($event, $signedPage->record);
         } catch (\Throwable $exception) {
             // An unsigned page is still a valid L2 page; never break delivery over a signature.
             $this->logger->error('Provenance signing failed: ' . $exception->getMessage(), ['exception' => $exception]);
+        }
+    }
+
+    private function storeForAudit(AfterCacheableContentIsGeneratedEvent $event, \stdClass $signedRecord): void
+    {
+        $request = $event->getRequest();
+        $pageInformation = $request->getAttribute('frontend.page.information');
+        $language = $request->getAttribute('language');
+        if ($pageInformation instanceof PageInformation) {
+            $this->signedRecordRepository->save(
+                $pageInformation->getId(),
+                $language instanceof SiteLanguage ? $language->getLanguageId() : 0,
+                $signedRecord
+            );
         }
     }
 
