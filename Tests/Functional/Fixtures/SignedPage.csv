@@ -1,6 +1,9 @@
+"be_users"
+,"uid","pid","username","realName","external_identity_uri"
+,1,0,"editor","Ada Lovelace","https://orcid.org/0000-0001-2345-6789"
 "pages"
 ,"uid","pid","title","slug","doktype","is_siteroot","provenance_document_uid"
 ,1,0,"Root","/",1,1,1
 "tx_provenance_document"
-,"uid","pid","hidden","document_uri","first_published_at","conformance_level"
-,1,1,0,"urn:uuid:7c2f0e1a-0000-4000-8000-000000000001",1778749200,2
+,"uid","pid","hidden","document_uri","first_published_at","last_substantive_revision_at","authors"
+,1,1,0,"urn:uuid:7c2f0e1a-0000-4000-8000-000000000001",1778749200,1778752800,"1"

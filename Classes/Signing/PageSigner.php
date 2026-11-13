@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CmsProvenance\ProvenanceSigning\Signing;
 
+use CmsProvenance\Provenance\Service\ConformanceLevel;
 use CmsProvenance\ProvenanceSigning\Canonicalization\CanonicalText;
 use CmsProvenance\ProvenanceSigning\Key\KeyStore;
 
@@ -19,27 +20,30 @@ final readonly class PageSigner
 {
     private const VOCABULARY = 'https://cms-provenance.org/ns/v1';
     private const SCRIPT_PATTERN = '#(<script type="application/ld\+json">)(.*?)(</script>)#s';
-    private const SIGNED_CONFORMANCE_LEVEL = 3;
 
     public function __construct(
         private CanonicalText $canonicalText,
         private RecordSigner $recordSigner,
         private KeyStore $keyStore,
+        private ConformanceLevel $conformanceLevel,
     ) {}
 
     /**
      * @param string $keyBaseUrl URL prefix under which a key document is published, ending with "/"
      */
-    public function signHtml(string $html, string $keyBaseUrl): string
+    public function signHtml(string $html, string $keyBaseUrl, bool $auditEndpoint = false): string
     {
-        return $this->signPage($html, $keyBaseUrl)?->html ?? $html;
+        return $this->signPage($html, $keyBaseUrl, $auditEndpoint)?->html ?? $html;
     }
 
     /**
      * @param string $keyBaseUrl URL prefix under which a key document is published, ending with "/"
      * @return SignedPage|null null when the page cannot or need not be signed
      */
-    public function signPage(string $html, string $keyBaseUrl): ?SignedPage
+    /**
+     * @param bool $auditEndpoint whether the site serves the Audit Endpoint, needed for L4
+     */
+    public function signPage(string $html, string $keyBaseUrl, bool $auditEndpoint = false): ?SignedPage
     {
         $records = $this->findProvenanceRecords($html);
         $key = $this->keyStore->activeKey();
@@ -50,7 +54,11 @@ final readonly class PageSigner
         [$fullMatch, $record] = $records[0];
         unset($record->signature);
         $record->key = $keyBaseUrl . $key->keyId;
-        $record->cpsConformance = max(self::SIGNED_CONFORMANCE_LEVEL, (int)($record->cpsConformance ?? 0));
+        $record->cpsConformance = $this->conformanceLevel->of(
+            json_decode(json_encode($record, JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR),
+            true,
+            $auditEndpoint
+        );
         $record->contentHash = $this->canonicalText->contentHash($html);
 
         $signed = $this->recordSigner->sign($record, $key->keyId, $this->keyStore->secretKey($key->keyId));

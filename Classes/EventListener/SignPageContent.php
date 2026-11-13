@@ -12,6 +12,7 @@ use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Frontend\Event\AfterCacheableContentIsGeneratedEvent;
 use TYPO3\CMS\Frontend\Page\PageInformation;
 
@@ -44,7 +45,11 @@ final readonly class SignPageContent
         $keyBaseUrl = $this->urlResolver->origin($site, $request) . KeysHandler::PATH . '/';
 
         try {
-            $signedPage = $this->pageSigner->signPage($this->getContent($event), $keyBaseUrl);
+            $signedPage = $this->pageSigner->signPage(
+                $this->getContent($event),
+                $keyBaseUrl,
+                ExtensionManagementUtility::isLoaded('provenance_audit')
+            );
             if ($signedPage === null) {
                 return;
             }

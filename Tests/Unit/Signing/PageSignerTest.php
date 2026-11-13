@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CmsProvenance\ProvenanceSigning\Tests\Unit\Signing;
 
+use CmsProvenance\Provenance\Service\ConformanceLevel;
 use CmsProvenance\ProvenanceSigning\Canonicalization\CanonicalText;
 use CmsProvenance\ProvenanceSigning\Canonicalization\JsonCanonicalizer;
 use CmsProvenance\ProvenanceSigning\Key\KeyStore;
@@ -77,24 +78,44 @@ final class PageSignerTest extends UnitTestCase
     }
 
     #[Test]
-    public function higherConformanceLevelIsKept(): void
+    public function signedPageWithFactsAndAuditEndpointReachesLevelFour(): void
     {
         $store = new KeyStore($this->directory);
         $store->generate();
+        $page = $this->page('<p>x</p>', ['claim' => [['@type' => 'Claim', 'text' => 'x']]]);
 
-        $signed = $this->pageSigner($store)->signHtml($this->page('<p>x</p>', 4), self::KEY_BASE);
-
-        self::assertSame(4, $this->extractRecord($signed)->cpsConformance);
+        self::assertSame(4, $this->extractRecord($this->pageSigner($store)->signHtml($page, self::KEY_BASE, true))->cpsConformance);
+        self::assertSame(3, $this->extractRecord($this->pageSigner($store)->signHtml($page, self::KEY_BASE, false))->cpsConformance);
     }
 
-    private function page(string $content, int $level = 2): string
+    #[Test]
+    public function incompleteRecordStaysAtLevelOneWhenSigned(): void
     {
-        $record = json_encode([
+        $store = new KeyStore($this->directory);
+        $key = $store->generate();
+
+        $signed = $this->pageSigner($store)->signHtml($this->page('<p>x</p>', ['author' => []]), self::KEY_BASE, true);
+        $record = $this->extractRecord($signed);
+
+        self::assertSame(1, $record->cpsConformance);
+        self::assertTrue($this->recordSigner()->verify($signed, $record, $key->publicKey));
+    }
+
+    /**
+     * @param array<string, mixed> $override members replacing those of a complete record
+     */
+    private function page(string $content, array $override = []): string
+    {
+        $record = json_encode($override + [
             '@context' => ['https://schema.org', 'https://cms-provenance.org/ns/v1'],
             '@type' => 'WebPage',
             '@id' => 'urn:uuid:00000000-0000-4000-8000-000000000001',
             'headline' => 'A </script> headline',
-            'cpsConformance' => $level,
+            'author' => [['@type' => 'Person', '@id' => 'https://example.org/people/ada']],
+            'datePublished' => '2026-11-13T10:00:00Z',
+            'lastSubstantiveRevision' => '2026-11-13T11:00:00Z',
+            'generator' => 'TYPO3 14.3 + provenance 0.1',
+            'cpsConformance' => 2,
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP);
 
         return '<!DOCTYPE html><html><head><title>t</title><script type="application/ld+json">' . $record
@@ -114,6 +135,6 @@ final class PageSignerTest extends UnitTestCase
 
     private function pageSigner(KeyStore $store): PageSigner
     {
-        return new PageSigner(new CanonicalText(), $this->recordSigner(), $store);
+        return new PageSigner(new CanonicalText(), $this->recordSigner(), $store, new ConformanceLevel());
     }
 }

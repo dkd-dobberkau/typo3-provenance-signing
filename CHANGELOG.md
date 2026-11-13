@@ -20,6 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Repository skeleton: composer.json, ext_emconf.php, Services.yaml,
   extension icon, contribution guide (milestone M1).
 
+### Changed
+
+- The level of a signed record comes from `ConformanceLevel` of the core: L3
+  when signed, L4 when the audit endpoint is installed as well, L1 for an
+  incomplete record.
+
 ### Fixed
 
 - The `key` URL in signed records was relative when the site base was
