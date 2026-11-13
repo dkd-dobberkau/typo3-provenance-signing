@@ -1,0 +1,24 @@
+{
+  "contentHash": "sha256:230523aa191b2f4b9a0176fda580d2196114859d6b01a6adbf5910a22d0b4bd2",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000001\",\"@type\":\"WebPage\",\"contentHash\":\"sha256:230523aa191b2f4b9a0176fda580d2196114859d6b01a6adbf5910a22d0b4bd2\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"headline\":\"The provenance gap\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
+  "canonicalRecordSha256": "1491bb8131ea273760753e4c5b1e0bcd115c13da0b82b56e421f2589fb236dae",
+  "signedRecord": {
+    "@context": [
+      "https://schema.org",
+      "https://cms-provenance.org/ns/v1"
+    ],
+    "@type": "WebPage",
+    "@id": "urn:uuid:00000000-0000-4000-8000-000000000001",
+    "datePublished": "2026-05-14T09:00:00Z",
+    "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
+    "cpsConformance": 3,
+    "generator": "CPS reference vectors",
+    "headline": "The provenance gap",
+    "contentHash": "sha256:230523aa191b2f4b9a0176fda580d2196114859d6b01a6adbf5910a22d0b4bd2",
+    "signature": {
+      "algorithm": "Ed25519",
+      "keyId": "cps-test-rfc8032-1",
+      "signatureValue": "MwPCH-56mQMNE6vpqX6FPqdoyVw4Sdxmp5vH0qPxZcfslW2lPhLveDheOZsuypyKmzsObJM6MVAKRv23E1E6AQ"
+    }
+  }
+}

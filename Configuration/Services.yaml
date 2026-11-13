@@ -6,3 +6,14 @@ services:
 
   CmsProvenance\ProvenanceSigning\:
     resource: '../Classes/*'
+    exclude: '../Classes/{Key/SigningKey.php,Key/KeyStoreException.php}'
+
+  CmsProvenance\ProvenanceSigning\Key\KeyStore:
+    factory: ['@CmsProvenance\ProvenanceSigning\Key\KeyStoreFactory', 'create']
+
+  CmsProvenance\ProvenanceSigning\Command\GenerateKeyCommand:
+    public: true
+  CmsProvenance\ProvenanceSigning\Command\RotateKeyCommand:
+    public: true
+  CmsProvenance\ProvenanceSigning\Command\ListKeysCommand:
+    public: true

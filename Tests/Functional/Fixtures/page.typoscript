@@ -1,0 +1,5 @@
+page = PAGE
+page.10 = TEXT
+page.10.value = <main><h1>Signed headline</h1><p>Signed claim &amp; more</p></main>
+
+@import 'EXT:provenance/Configuration/Sets/Provenance/setup.typoscript'

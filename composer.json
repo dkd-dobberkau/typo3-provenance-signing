@@ -16,13 +16,40 @@
         "source": "https://github.com/dkd-dobberkau/typo3-provenance-signing"
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
+        "ext-intl": "*",
+        "ext-sodium": "*",
+        "cms-provenance/provenance": "^0.1@dev",
         "typo3/cms-core": "^13.4 || ^14.0",
-        "cms-provenance/provenance": "^0.1@dev"
+        "typo3/cms-frontend": "^13.4 || ^14.0"
     },
+    "require-dev": {
+        "typo3/testing-framework": "^9.7",
+        "typo3/cms-fluid": "^13.4 || ^14.0"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/dkd-dobberkau/typo3-provenance"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "CmsProvenance\\ProvenanceSigning\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CmsProvenance\\ProvenanceSigning\\Tests\\": "Tests/"
+        }
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin",
+        "sort-packages": true,
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
         }
     },
     "extra": {
@@ -31,7 +58,19 @@
             "version": "0.0.0",
             "Package": {
                 "providesPackages": {}
-            }
+            },
+            "web-dir": ".Build/public"
+        },
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
         }
+    },
+    "scripts": {
+        "test:unit": "phpunit -c Build/phpunit/UnitTests.xml",
+        "test:functional": "phpunit -c Build/phpunit/FunctionalTests.xml",
+        "test": [
+            "@test:unit",
+            "@test:functional"
+        ]
     }
 }

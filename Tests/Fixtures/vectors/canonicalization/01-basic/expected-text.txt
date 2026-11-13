@@ -1,0 +1,4 @@
+The provenance gap
+Schema.org describes what a page is. It does not say who made an assertion.
+Records
+Signatures

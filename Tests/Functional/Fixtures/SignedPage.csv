@@ -1,0 +1,6 @@
+"pages"
+,"uid","pid","title","slug","doktype","is_siteroot","provenance_document_uid"
+,1,0,"Root","/",1,1,1
+"tx_provenance_document"
+,"uid","pid","hidden","document_uri","first_published_at","conformance_level"
+,1,1,0,"urn:uuid:7c2f0e1a-0000-4000-8000-000000000001",1778749200,2

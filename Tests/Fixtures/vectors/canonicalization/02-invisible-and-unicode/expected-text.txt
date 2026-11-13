@@ -1,0 +1,5 @@
+Provenance and zerowidth
+reversed text and BOM
+Café and Café and Café
+non breaking narrow ideographic and tab
+tagchars

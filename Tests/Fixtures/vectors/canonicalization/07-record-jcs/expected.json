@@ -1,0 +1,35 @@
+{
+  "contentHash": "sha256:25b7c91623c8eba231dfc7d98130c73398677bdd1e6c565e8d7e8a6569ccfc3f",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000007\",\"@type\":\"WebPage\",\"Zulu\":true,\"alpha\":-9007199254740991,\"contentHash\":\"sha256:25b7c91623c8eba231dfc7d98130c73398677bdd1e6c565e8d7e8a6569ccfc3f\",\"cpsConformance\":3,\"generator\":\"CPS reference vectors\",\"headline\":\"Quotes \\\" backslash \\\\ tab \\t newline \\n bell \\u0007 slash / unicode é € 😀\",\"zeta\":1,\"éclair\":null,\"€uro\":[3,{\"a\":[],\"b\":false}],\"😀\":\"emoji key sorts before U+FFFF by UTF-16\",\"￿\":\"last\"}",
+  "canonicalRecordSha256": "a97ae7227b3cde462db123564e3d2b1fb696ba74125218c0a727864d4f9e11bf",
+  "signedRecord": {
+    "@context": [
+      "https://schema.org",
+      "https://cms-provenance.org/ns/v1"
+    ],
+    "@type": "WebPage",
+    "@id": "urn:uuid:00000000-0000-4000-8000-000000000007",
+    "headline": "Quotes \" backslash \\ tab \t newline \n bell \u0007 slash / unicode é € 😀",
+    "zeta": 1,
+    "alpha": -9007199254740991,
+    "Zulu": true,
+    "éclair": null,
+    "€uro": [
+      3,
+      {
+        "b": false,
+        "a": []
+      }
+    ],
+    "😀": "emoji key sorts before U+FFFF by UTF-16",
+    "￿": "last",
+    "cpsConformance": 3,
+    "generator": "CPS reference vectors",
+    "signature": {
+      "algorithm": "Ed25519",
+      "keyId": "cps-test-rfc8032-1",
+      "signatureValue": "Clol1M6nvgOIEi4o7IDdPkW8AKbvv5UlL8Gc5hLwVS0UOZBU-Tokob8IwJgO-bS1lOOXHH_3IB8aIEFYUB0TBw"
+    },
+    "contentHash": "sha256:25b7c91623c8eba231dfc7d98130c73398677bdd1e6c565e8d7e8a6569ccfc3f"
+  }
+}

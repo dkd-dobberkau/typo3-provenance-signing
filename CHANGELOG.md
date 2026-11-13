@@ -8,5 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Signing of the page provenance record (milestone M4): canonical text and
+  content hash per Annex A, JCS record canonicalisation, Ed25519 signature,
+  written into the cached page. Passes the conformance vectors byte for byte.
+- File-based key store with `provenance:keys:generate`, `:rotate` and `:list`;
+  retired keys stay published.
+- Public keys as JWK under `/.well-known/content-provenance/keys`.
 - Repository skeleton: composer.json, ext_emconf.php, Services.yaml,
   extension icon, contribution guide (milestone M1).

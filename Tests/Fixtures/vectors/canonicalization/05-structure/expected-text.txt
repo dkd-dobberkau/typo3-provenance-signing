@@ -1,0 +1,16 @@
+Line one
+Line two
+Line three
+Chart of signed pages
+Figure 1
+An inline image and empty alt.
+Level
+Name
+L3
+Verifiable
+preformatted
+text keeps no spacing
+outer
+inner
+tail
+lots of whitespace

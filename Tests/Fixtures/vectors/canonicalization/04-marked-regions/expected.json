@@ -1,0 +1,23 @@
+{
+  "contentHash": "sha256:1eee69dc2ab2837c682abfd151daf78b20eefd1f218f1648a1ca57bf1559aad6",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000004\",\"@type\":\"WebPage\",\"contentHash\":\"sha256:1eee69dc2ab2837c682abfd151daf78b20eefd1f218f1648a1ca57bf1559aad6\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
+  "canonicalRecordSha256": "364b32940e369fea99d9638f09233bf27710255e5e7883d2372c81ee501b5a1d",
+  "signedRecord": {
+    "@context": [
+      "https://schema.org",
+      "https://cms-provenance.org/ns/v1"
+    ],
+    "@type": "WebPage",
+    "@id": "urn:uuid:00000000-0000-4000-8000-000000000004",
+    "datePublished": "2026-05-14T09:00:00Z",
+    "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
+    "cpsConformance": 3,
+    "generator": "CPS reference vectors",
+    "contentHash": "sha256:1eee69dc2ab2837c682abfd151daf78b20eefd1f218f1648a1ca57bf1559aad6",
+    "signature": {
+      "algorithm": "Ed25519",
+      "keyId": "cps-test-rfc8032-1",
+      "signatureValue": "F9VgLKUGtvwbqlV7FNnmoYRnL9F02XPjkkoajsKxtqqboZ-a2seQF27rHQKJf26HzHodod5ddrt5iMVVk5bPDA"
+    }
+  }
+}

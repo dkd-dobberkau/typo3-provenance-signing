@@ -1,0 +1,2 @@
+# cat=basic; type=string; label=Key directory: Where site keys are stored, absolute or relative to the project root. Must not be inside the web root.
+keyDirectory = var/provenance-keys
