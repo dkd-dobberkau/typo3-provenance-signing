@@ -1,7 +1,7 @@
 {
   "contentHash": "sha256:1eee69dc2ab2837c682abfd151daf78b20eefd1f218f1648a1ca57bf1559aad6",
-  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000004\",\"@type\":\"WebPage\",\"contentHash\":\"sha256:1eee69dc2ab2837c682abfd151daf78b20eefd1f218f1648a1ca57bf1559aad6\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
-  "canonicalRecordSha256": "364b32940e369fea99d9638f09233bf27710255e5e7883d2372c81ee501b5a1d",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000004\",\"@type\":\"WebPage\",\"author\":[{\"@id\":\"https://orcid.org/0000-0002-1825-0097\",\"@type\":\"Person\",\"name\":\"Josiah Carberry\"}],\"contentHash\":\"sha256:1eee69dc2ab2837c682abfd151daf78b20eefd1f218f1648a1ca57bf1559aad6\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
+  "canonicalRecordSha256": "c065cfa7f4686f54b89fb3c7a962506164c40dd8d5bc55237ee4e95244e9a008",
   "signedRecord": {
     "@context": [
       "https://schema.org",
@@ -9,6 +9,13 @@
     ],
     "@type": "WebPage",
     "@id": "urn:uuid:00000000-0000-4000-8000-000000000004",
+    "author": [
+      {
+        "@type": "Person",
+        "@id": "https://orcid.org/0000-0002-1825-0097",
+        "name": "Josiah Carberry"
+      }
+    ],
     "datePublished": "2026-05-14T09:00:00Z",
     "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
     "cpsConformance": 3,
@@ -17,7 +24,7 @@
     "signature": {
       "algorithm": "Ed25519",
       "keyId": "cps-test-rfc8032-1",
-      "signatureValue": "F9VgLKUGtvwbqlV7FNnmoYRnL9F02XPjkkoajsKxtqqboZ-a2seQF27rHQKJf26HzHodod5ddrt5iMVVk5bPDA"
+      "signatureValue": "rLqn2b5YkVdOrL2gL7FayJCIUxsQ7ZHvLPpjtxpcUKz_8jkBUI522MgWwSyl4u6QwXrBFF810tY7VynPulscAw"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "contentHash": "sha256:334a8db8c0db7a981f129833da8e54a319fb99bc6496fe78fb487e2db1291253",
-  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000005\",\"@type\":\"WebPage\",\"contentHash\":\"sha256:334a8db8c0db7a981f129833da8e54a319fb99bc6496fe78fb487e2db1291253\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
-  "canonicalRecordSha256": "d6beba3acae6b8095c546dbd4412c4f9a0968c3b5d76cc1c9e676904695d62fc",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000005\",\"@type\":\"WebPage\",\"author\":[{\"@id\":\"https://orcid.org/0000-0002-1825-0097\",\"@type\":\"Person\",\"name\":\"Josiah Carberry\"}],\"contentHash\":\"sha256:334a8db8c0db7a981f129833da8e54a319fb99bc6496fe78fb487e2db1291253\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
+  "canonicalRecordSha256": "b615ce441f790ce453c873be28f89089561bd258270ba4ffc911f17d177f75e4",
   "signedRecord": {
     "@context": [
       "https://schema.org",
@@ -9,6 +9,13 @@
     ],
     "@type": "WebPage",
     "@id": "urn:uuid:00000000-0000-4000-8000-000000000005",
+    "author": [
+      {
+        "@type": "Person",
+        "@id": "https://orcid.org/0000-0002-1825-0097",
+        "name": "Josiah Carberry"
+      }
+    ],
     "datePublished": "2026-05-14T09:00:00Z",
     "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
     "cpsConformance": 3,
@@ -17,7 +24,7 @@
     "signature": {
       "algorithm": "Ed25519",
       "keyId": "cps-test-rfc8032-1",
-      "signatureValue": "qGaZelCHU0Jy4Dz2KoX_Yj5N_QkAY7ofwsPe5AmHpWmZwH3-vFMNssprEsWz5WXH4laj1rrImO-ZJFJj1wxLAA"
+      "signatureValue": "Zh6ZUZqUgyJXIUwQB8C7GF9iwdDnM5qVyogsyRXRmFj_VVUNh7E71-YPpgXuxKRHBcpq4mYkX3zhiVRiby6ZDA"
     }
   }
 }

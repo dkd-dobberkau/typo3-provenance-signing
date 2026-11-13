@@ -1,7 +1,7 @@
 {
   "contentHash": "sha256:dd3f24ec9a41e2c8148bef65f1dd5aae1d4989a16157c03a43aa753aef024b66",
-  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000006\",\"@type\":\"WebPage\",\"contentHash\":\"sha256:dd3f24ec9a41e2c8148bef65f1dd5aae1d4989a16157c03a43aa753aef024b66\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
-  "canonicalRecordSha256": "aa73d017987512a0935f43658f9f9df24635feb74f151b7b517e4ae3d532e144",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000006\",\"@type\":\"WebPage\",\"author\":[{\"@id\":\"https://orcid.org/0000-0002-1825-0097\",\"@type\":\"Person\",\"name\":\"Josiah Carberry\"}],\"contentHash\":\"sha256:dd3f24ec9a41e2c8148bef65f1dd5aae1d4989a16157c03a43aa753aef024b66\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
+  "canonicalRecordSha256": "138c7971355eca9952d05035c4fcc6ebad10b002f0bff0961ed62790a6f5be54",
   "signedRecord": {
     "@context": [
       "https://schema.org",
@@ -9,6 +9,13 @@
     ],
     "@type": "WebPage",
     "@id": "urn:uuid:00000000-0000-4000-8000-000000000006",
+    "author": [
+      {
+        "@type": "Person",
+        "@id": "https://orcid.org/0000-0002-1825-0097",
+        "name": "Josiah Carberry"
+      }
+    ],
     "datePublished": "2026-05-14T09:00:00Z",
     "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
     "cpsConformance": 3,
@@ -17,7 +24,7 @@
     "signature": {
       "algorithm": "Ed25519",
       "keyId": "cps-test-rfc8032-1",
-      "signatureValue": "Xv5NlzcbbuSFbly6_ZoHpxROhOiTPUcU34HfNuXRKzXStffo6F7XVFRyUHrkw3o9F7-eZmyo6aAzuHsyLMxRCg"
+      "signatureValue": "w4I2Bm80-I9JB6iZgYcPsNxnFh54piOqcayxLHPV5EAFTcZZPneYrW1yTOO2jynufeyjKx0xeitPjUXUJzQOAg"
     }
   }
 }

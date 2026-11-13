@@ -1,7 +1,7 @@
 {
   "contentHash": "sha256:25b7c91623c8eba231dfc7d98130c73398677bdd1e6c565e8d7e8a6569ccfc3f",
-  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000007\",\"@type\":\"WebPage\",\"Zulu\":true,\"alpha\":-9007199254740991,\"contentHash\":\"sha256:25b7c91623c8eba231dfc7d98130c73398677bdd1e6c565e8d7e8a6569ccfc3f\",\"cpsConformance\":3,\"generator\":\"CPS reference vectors\",\"headline\":\"Quotes \\\" backslash \\\\ tab \\t newline \\n bell \\u0007 slash / unicode é € 😀\",\"zeta\":1,\"éclair\":null,\"€uro\":[3,{\"a\":[],\"b\":false}],\"😀\":\"emoji key sorts before U+FFFF by UTF-16\",\"￿\":\"last\"}",
-  "canonicalRecordSha256": "a97ae7227b3cde462db123564e3d2b1fb696ba74125218c0a727864d4f9e11bf",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000007\",\"@type\":\"WebPage\",\"Zulu\":true,\"alpha\":-9007199254740991,\"author\":[{\"@id\":\"https://orcid.org/0000-0002-1825-0097\",\"@type\":\"Person\",\"name\":\"Josiah Carberry\"}],\"contentHash\":\"sha256:25b7c91623c8eba231dfc7d98130c73398677bdd1e6c565e8d7e8a6569ccfc3f\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"headline\":\"Quotes \\\" backslash \\\\ tab \\t newline \\n bell \\u0007 slash / unicode é € 😀\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\",\"zeta\":1,\"éclair\":null,\"€uro\":[3,{\"a\":[],\"b\":false}],\"😀\":\"emoji key sorts before U+FFFF by UTF-16\",\"￿\":\"last\"}",
+  "canonicalRecordSha256": "bf32463194443e6cb5ae0c081ba07bcb11fe1399a4457b722c82eefb114591fb",
   "signedRecord": {
     "@context": [
       "https://schema.org",
@@ -9,6 +9,15 @@
     ],
     "@type": "WebPage",
     "@id": "urn:uuid:00000000-0000-4000-8000-000000000007",
+    "author": [
+      {
+        "@type": "Person",
+        "@id": "https://orcid.org/0000-0002-1825-0097",
+        "name": "Josiah Carberry"
+      }
+    ],
+    "datePublished": "2026-05-14T09:00:00Z",
+    "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
     "headline": "Quotes \" backslash \\ tab \t newline \n bell \u0007 slash / unicode é € 😀",
     "zeta": 1,
     "alpha": -9007199254740991,
@@ -28,7 +37,7 @@
     "signature": {
       "algorithm": "Ed25519",
       "keyId": "cps-test-rfc8032-1",
-      "signatureValue": "Clol1M6nvgOIEi4o7IDdPkW8AKbvv5UlL8Gc5hLwVS0UOZBU-Tokob8IwJgO-bS1lOOXHH_3IB8aIEFYUB0TBw"
+      "signatureValue": "j6EurU_hLgp25JpYcCEk8qWNphK1XL_D5wxwdHV1712RMRm15MidqS2wt0-ioH3ZL-CxTp7ZgCmG9y0QDekdAg"
     },
     "contentHash": "sha256:25b7c91623c8eba231dfc7d98130c73398677bdd1e6c565e8d7e8a6569ccfc3f"
   }

@@ -5,6 +5,15 @@
   ],
   "@type": "WebPage",
   "@id": "urn:uuid:00000000-0000-4000-8000-000000000007",
+  "author": [
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0000-0002-1825-0097",
+      "name": "Josiah Carberry"
+    }
+  ],
+  "datePublished": "2026-05-14T09:00:00Z",
+  "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
   "headline": "Quotes \" backslash \\ tab \t newline \n bell \u0007 slash / unicode é € 😀",
   "zeta": 1,
   "alpha": -9007199254740991,

@@ -5,6 +5,13 @@
   ],
   "@type": "WebPage",
   "@id": "urn:uuid:00000000-0000-4000-8000-000000000002",
+  "author": [
+    {
+      "@type": "Person",
+      "@id": "https://orcid.org/0000-0002-1825-0097",
+      "name": "Josiah Carberry"
+    }
+  ],
   "datePublished": "2026-05-14T09:00:00Z",
   "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
   "cpsConformance": 3,

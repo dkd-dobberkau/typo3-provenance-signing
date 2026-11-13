@@ -1,7 +1,7 @@
 {
   "contentHash": "sha256:7f22c59f89faab341e9857f6bc359b38546cab6efea7249d6f085d24976c7ec2",
-  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000003\",\"@type\":\"WebPage\",\"contentHash\":\"sha256:7f22c59f89faab341e9857f6bc359b38546cab6efea7249d6f085d24976c7ec2\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
-  "canonicalRecordSha256": "e816347f8aaea423960c944c46057649fb44250eb47d925c49e455c0c70f0662",
+  "canonicalRecord": "{\"@context\":[\"https://schema.org\",\"https://cms-provenance.org/ns/v1\"],\"@id\":\"urn:uuid:00000000-0000-4000-8000-000000000003\",\"@type\":\"WebPage\",\"author\":[{\"@id\":\"https://orcid.org/0000-0002-1825-0097\",\"@type\":\"Person\",\"name\":\"Josiah Carberry\"}],\"contentHash\":\"sha256:7f22c59f89faab341e9857f6bc359b38546cab6efea7249d6f085d24976c7ec2\",\"cpsConformance\":3,\"datePublished\":\"2026-05-14T09:00:00Z\",\"generator\":\"CPS reference vectors\",\"lastSubstantiveRevision\":\"2026-05-14T09:00:00Z\"}",
+  "canonicalRecordSha256": "da14c30341608065e30dfde328c10fdad35051b5794fa2e6d143737e83e57525",
   "signedRecord": {
     "@context": [
       "https://schema.org",
@@ -9,6 +9,13 @@
     ],
     "@type": "WebPage",
     "@id": "urn:uuid:00000000-0000-4000-8000-000000000003",
+    "author": [
+      {
+        "@type": "Person",
+        "@id": "https://orcid.org/0000-0002-1825-0097",
+        "name": "Josiah Carberry"
+      }
+    ],
     "datePublished": "2026-05-14T09:00:00Z",
     "lastSubstantiveRevision": "2026-05-14T09:00:00Z",
     "cpsConformance": 3,
@@ -17,7 +24,7 @@
     "signature": {
       "algorithm": "Ed25519",
       "keyId": "cps-test-rfc8032-1",
-      "signatureValue": "Xj9qZfJSPoJ8J2nt1EZgV6mwbpZYHX0V35I828YMHDcRhsz6de_aj4TYvz0C1dKFXg0o9tOY6xBaJ__KDp04CA"
+      "signatureValue": "qDh2YRbAMN0oCqmCCM0AEceTUSwFyxbOP-Id2KymR_qP6F4fIdJlrYMUox85uti9vswgagERI3ZNhntfC81gCA"
     }
   }
 }
