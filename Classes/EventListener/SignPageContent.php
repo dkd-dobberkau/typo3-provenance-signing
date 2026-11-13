@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CmsProvenance\ProvenanceSigning\EventListener;
 
+use CmsProvenance\Provenance\Service\AbsoluteUrlResolver;
 use CmsProvenance\ProvenanceSigning\Domain\Repository\SignedRecordRepository;
 use CmsProvenance\ProvenanceSigning\Signing\PageSigner;
 use CmsProvenance\ProvenanceSigning\WellKnown\KeysHandler;
@@ -30,15 +31,17 @@ final readonly class SignPageContent
         private PageSigner $pageSigner,
         private SignedRecordRepository $signedRecordRepository,
         private LoggerInterface $logger,
+        private AbsoluteUrlResolver $urlResolver,
     ) {}
 
     public function __invoke(AfterCacheableContentIsGeneratedEvent $event): void
     {
-        $site = $event->getRequest()->getAttribute('site');
+        $request = $event->getRequest();
+        $site = $request->getAttribute('site');
         if (!$site instanceof Site) {
             return;
         }
-        $keyBaseUrl = rtrim((string)$site->getBase()->withPath(''), '/') . KeysHandler::PATH . '/';
+        $keyBaseUrl = $this->urlResolver->origin($site, $request) . KeysHandler::PATH . '/';
 
         try {
             $signedPage = $this->pageSigner->signPage($this->getContent($event), $keyBaseUrl);

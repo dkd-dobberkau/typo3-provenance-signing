@@ -19,3 +19,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Public keys as JWK under `/.well-known/content-provenance/keys`.
 - Repository skeleton: composer.json, ext_emconf.php, Services.yaml,
   extension icon, contribution guide (milestone M1).
+
+### Fixed
+
+- The `key` URL in signed records was relative when the site base was
+  relative, such as `/`, so verifiers could not fetch the key. It is now
+  absolute, completed from the request.
