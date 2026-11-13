@@ -75,6 +75,11 @@ Extension key: [`provenance_signing`](https://extensions.typo3.org/extension/pro
 - Product requirements (PRD): <https://github.com/dkd-dobberkau/cms-provenance.org/blob/main/docs/prd-typo3-extensions.md>
 - Conformance test suite: <https://github.com/dkd-dobberkau/content-provenance-conformance>
 
+## Documentation
+
+Installation, configuration, the editorial guide and verification are
+documented in the [manual of the core extension](https://github.com/dkd-dobberkau/typo3-provenance/blob/main/Documentation/Index.rst).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).

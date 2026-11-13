@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<guides xmlns="https://www.phpdoc.org/guides"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.phpdoc.org/guides vendor/phpdocumentor/guides-cli/resources/schema/guides.xsd"
+        links-are-relative="true">
+    <extension class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+               project-home="https://cms-provenance.org"
+               project-contact="mailto:hello@cms-provenance.org"
+               project-repository="https://github.com/dkd-dobberkau/typo3-provenance-signing"
+               project-issues="https://github.com/dkd-dobberkau/typo3-provenance-signing/issues"
+               edit-on-github="dkd-dobberkau/typo3-provenance-signing"
+               edit-on-github-branch="main"
+               typo3-core-preferred="stable"/>
+    <project title="Content Provenance: Signing"
+             release="0.1-dev"
+             version="0.1"
+             copyright="since 2026 by the Content Provenance contributors"/>
+</guides>

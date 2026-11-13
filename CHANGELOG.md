@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Documentation pointing to the manual of the core extension (milestone M7).
 - The latest signed record per page and language is stored in
   `tx_provenancesigning_record` for the audit endpoint.
 - Signing of the page provenance record (milestone M4): canonical text and
