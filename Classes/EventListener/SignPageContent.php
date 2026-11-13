@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace CmsProvenance\ProvenanceSigning\EventListener;
 
 use CmsProvenance\ProvenanceSigning\Domain\Repository\SignedRecordRepository;
-use CmsProvenance\ProvenanceSigning\Middleware\PublicKeyEndpoint;
 use CmsProvenance\ProvenanceSigning\Signing\PageSigner;
+use CmsProvenance\ProvenanceSigning\WellKnown\KeysHandler;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
 use TYPO3\CMS\Core\Site\Entity\Site;
@@ -38,7 +38,7 @@ final readonly class SignPageContent
         if (!$site instanceof Site) {
             return;
         }
-        $keyBaseUrl = rtrim((string)$site->getBase()->withPath(''), '/') . PublicKeyEndpoint::PATH . '/';
+        $keyBaseUrl = rtrim((string)$site->getBase()->withPath(''), '/') . KeysHandler::PATH . '/';
 
         try {
             $signedPage = $this->pageSigner->signPage($this->getContent($event), $keyBaseUrl);

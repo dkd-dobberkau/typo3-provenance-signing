@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace CmsProvenance\ProvenanceSigning\Middleware;
+namespace CmsProvenance\ProvenanceSigning\WellKnown;
 
+use CmsProvenance\Provenance\WellKnown\WellKnownHandlerInterface;
+use CmsProvenance\Provenance\WellKnown\WellKnownRouter;
 use CmsProvenance\ProvenanceSigning\Key\KeyStore;
 use CmsProvenance\ProvenanceSigning\Key\SigningKey;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
 
 /**
@@ -17,27 +17,28 @@ use TYPO3\CMS\Core\Http\JsonResponse;
  *   /.well-known/content-provenance/keys          all keys, including retired ones
  *   /.well-known/content-provenance/keys/{keyId}  one key, as referenced by a record's "key"
  */
-final readonly class PublicKeyEndpoint implements MiddlewareInterface
+final readonly class KeysHandler implements WellKnownHandlerInterface
 {
-    public const PATH = '/.well-known/content-provenance/keys';
+    public const SUB_PATH = 'keys';
+    public const PATH = WellKnownRouter::BASE_PATH . '/' . self::SUB_PATH;
 
     public function __construct(
         private KeyStore $keyStore,
     ) {}
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function getSubPath(): string
     {
-        $path = rtrim($request->getUri()->getPath(), '/');
-        if ($request->getMethod() !== 'GET' || ($path !== self::PATH && !str_starts_with($path, self::PATH . '/'))) {
-            return $handler->handle($request);
-        }
+        return self::SUB_PATH;
+    }
 
-        if ($path === self::PATH) {
+    public function handle(ServerRequestInterface $request, string $remainder): ResponseInterface
+    {
+        if ($remainder === '') {
             return $this->respond(['keys' => array_map($this->describe(...), $this->keyStore->publicKeys())]);
         }
 
-        $key = $this->keyStore->find(substr($path, strlen(self::PATH) + 1));
-        return $key !== null ? $this->respond($this->describe($key)) : $this->respond(['error' => 'unknown key'], 404);
+        $key = $this->keyStore->find($remainder);
+        return $key !== null ? $this->respond($this->describe($key)) : new JsonResponse(['error' => 'unknown key'], 404);
     }
 
     /**
@@ -58,10 +59,9 @@ final readonly class PublicKeyEndpoint implements MiddlewareInterface
         ];
     }
 
-    private function respond(array $data, int $status = 200): ResponseInterface
+    private function respond(array $data): ResponseInterface
     {
-        return (new JsonResponse($data, $status, [], JSON_UNESCAPED_SLASHES))
-            ->withHeader('Access-Control-Allow-Origin', '*')
+        return (new JsonResponse($data, 200, [], JSON_UNESCAPED_SLASHES))
             ->withHeader('Cache-Control', 'public, max-age=300');
     }
 }
