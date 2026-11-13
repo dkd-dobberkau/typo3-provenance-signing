@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Validate and lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: intl
+          coverage: none
+      - name: Validate composer.json
+        run: composer validate --no-check-lock --no-check-publish
+      - name: Lint PHP files
+        run: find . -name '*.php' -not -path './.Build/*' -print0 | xargs -0 -n1 php -l
+
+  trivy:
+    name: Trivy scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Scan repository for vulnerabilities, secrets and misconfiguration
+        run: >
+          docker run --rm -v "$PWD:/src" aquasec/trivy:0.76.2
+          fs --scanners vuln,secret,misconfig --severity HIGH,CRITICAL --exit-code 1 /src
