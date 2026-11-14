@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="messages" product-name="provenance_signing">
+        <header/>
+        <body>
+            <trans-unit id="selectPage"><source>Select a page in the page tree.</source></trans-unit>
+            <trans-unit id="noPageAccess"><source>You may not view this page.</source></trans-unit>
+            <trans-unit id="noRevisionAccess"><source>You may not view this revision.</source></trans-unit>
+            <trans-unit id="liveNotice"><source>The revision log shows what the live site delivered: cached renders, one entry per new signed record.</source></trans-unit>
+            <trans-unit id="workspaceNotice"><source>You are working in a workspace. The revision log shows what the live site delivered.</source></trans-unit>
+            <trans-unit id="empty"><source>No revisions yet. A revision is written the next time the page is rendered and signed.</source></trans-unit>
+            <trans-unit id="column.time"><source>Signed</source></trans-unit>
+            <trans-unit id="column.language"><source>Language</source></trans-unit>
+            <trans-unit id="column.hash"><source>Content hash</source></trans-unit>
+            <trans-unit id="column.level"><source>Level</source></trans-unit>
+            <trans-unit id="column.request"><source>Request</source></trans-unit>
+            <trans-unit id="column.changes"><source>Changed against previous</source></trans-unit>
+            <trans-unit id="firstRevision"><source>First revision</source></trans-unit>
+            <trans-unit id="request.html"><source>HTML</source></trans-unit>
+            <trans-unit id="request.markdown"><source>Markdown</source></trans-unit>
+            <trans-unit id="previous"><source>Newer</source></trans-unit>
+            <trans-unit id="next"><source>Older</source></trans-unit>
+            <trans-unit id="back"><source>Back to the list</source></trans-unit>
+            <trans-unit id="detail.text"><source>Canonical text</source></trans-unit>
+            <trans-unit id="detail.textDiff"><source>Canonical text, changes against the previous revision</source></trans-unit>
+            <trans-unit id="detail.record"><source>Signed record</source></trans-unit>
+            <trans-unit id="detail.key"><source>Key</source></trans-unit>
+            <trans-unit id="detail.document"><source>Record</source></trans-unit>
+        </body>
+    </file>
+</xliff>

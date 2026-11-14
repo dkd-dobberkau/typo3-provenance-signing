@@ -1,0 +1,48 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Module"/>
+
+<f:section name="Content">
+    <f:variable name="ll" value="LLL:EXT:provenance_signing/Resources/Private/Language/locallang_module.xlf:"/>
+    <f:if condition="{mayView}">
+        <f:then>
+            <p><a href="{backUrl}"><f:translate key="{ll}back"/></a></p>
+            <h1><f:format.date format="Y-m-d H:i:s">@{revision.signed_at}</f:format.date></h1>
+            <table class="table table-sm w-auto">
+                <tr><th><f:translate key="{ll}column.language"/></th><td>{language}</td></tr>
+                <tr><th><f:translate key="{ll}column.hash"/></th><td><code>{revision.content_hash}</code></td></tr>
+                <tr><th><f:translate key="{ll}column.level"/></th><td>L{revision.cps_conformance}</td></tr>
+                <tr><th><f:translate key="{ll}detail.key"/></th><td><code>{revision.key_id}</code></td></tr>
+                <tr><th><f:translate key="{ll}detail.document"/></th><td><code>{revision.document_uri}</code></td></tr>
+                <tr><th><f:translate key="{ll}column.request"/></th><td><f:translate key="{ll}request.{revision.request_kind}"/> {revision.request_url}</td></tr>
+                <tr>
+                    <th><f:translate key="{ll}column.changes"/></th>
+                    <td><f:if condition="{changes}"><f:then>{changes}</f:then><f:else><f:translate key="{ll}firstRevision"/></f:else></f:if></td>
+                </tr>
+            </table>
+
+            <f:if condition="{textDiff}">
+                <f:then>
+                    <h2><f:translate key="{ll}detail.textDiff"/></h2>
+                    <f:comment>DiffUtility escapes both texts; only its ins/del markup is output raw.</f:comment>
+                    <pre class="diff-result" style="white-space: pre-wrap">{textDiff -> f:format.raw()}</pre>
+                </f:then>
+                <f:else>
+                    <h2><f:translate key="{ll}detail.text"/></h2>
+                    <pre style="white-space: pre-wrap">{revision.canonical_text}</pre>
+                </f:else>
+            </f:if>
+
+            <h2><f:translate key="{ll}detail.record"/></h2>
+            <pre>{recordJson}</pre>
+        </f:then>
+        <f:else>
+            <f:be.infobox state="2"><f:translate key="{ll}noRevisionAccess"/></f:be.infobox>
+        </f:else>
+    </f:if>
+</f:section>
+
+</html>

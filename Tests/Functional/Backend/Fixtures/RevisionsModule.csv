@@ -1,0 +1,17 @@
+"be_groups"
+,"uid","pid","title","tables_select","groupMods","allowed_languages"
+,1,0,"Editors","pages","provenance,provenance_revisions","0"
+"be_users"
+,"uid","pid","username","admin","usergroup","db_mountpoints","options"
+,1,0,"admin",1,"","",0
+,2,0,"editor",0,"1","1",3
+"pages"
+,"uid","pid","title","doktype","perms_userid","perms_user","perms_everybody"
+,1,0,"Root",1,1,31,1
+,2,0,"Outside",1,1,31,1
+"tx_provenancesigning_revision"
+,"uid","page_uid","language_uid","document_uri","content_hash","record_hash","key_id","cps_conformance","signed_record","canonical_text","request_kind","request_url","signed_at"
+,1,1,0,"urn:uuid:1","sha256:aaaaaaaa11","1111","key-1",4,"{""headline"":""Root""}","Old text","html","http://localhost/",1778749200
+,2,1,0,"urn:uuid:1","sha256:bbbbbbbb22","2222","key-1",4,"{""headline"":""Root, revised""}","<script>alert(1)</script> new text","markdown","http://localhost/index.md",1778752800
+,3,1,1,"urn:uuid:1","sha256:cccccccc33","3333","key-1",4,"{""headline"":""Racine""}","Texte","html","http://localhost/fr/",1778750000
+,4,2,0,"urn:uuid:2","sha256:dddddddd44","4444","key-1",4,"{}","Outside text","html","http://localhost/outside",1778753000

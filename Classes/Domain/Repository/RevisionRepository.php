@@ -123,6 +123,24 @@ final readonly class RevisionRepository
     }
 
     /**
+     * @return list<int>
+     */
+    public function languagesForPage(int $pageUid): array
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
+        $languages = $queryBuilder
+            ->select('language_uid')
+            ->distinct()
+            ->from(self::TABLE)
+            ->where($queryBuilder->expr()->eq('page_uid', $queryBuilder->createNamedParameter($pageUid, Connection::PARAM_INT)))
+            ->orderBy('language_uid')
+            ->executeQuery()
+            ->fetchFirstColumn();
+
+        return array_map(intval(...), $languages);
+    }
+
+    /**
      * @param list<int> $languageUids
      */
     private function forPage(int $pageUid, array $languageUids): QueryBuilder

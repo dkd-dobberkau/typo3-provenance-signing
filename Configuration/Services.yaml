@@ -23,3 +23,7 @@ services:
     public: true
   CmsProvenance\ProvenanceSigning\Signing\PageSigner:
     public: true
+  CmsProvenance\ProvenanceSigning\Domain\Repository\RevisionRepository:
+    public: true
+  CmsProvenance\ProvenanceSigning\Backend\Controller\RevisionsModuleController:
+    public: true
