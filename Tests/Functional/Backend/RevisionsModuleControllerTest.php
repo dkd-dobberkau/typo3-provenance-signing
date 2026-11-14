@@ -45,6 +45,17 @@ final class RevisionsModuleControllerTest extends FunctionalTestCase
     }
 
     #[Test]
+    public function revisionTheSiteDeliversNowIsMarked(): void
+    {
+        // A, then B, then back to A: the oldest revision is the current one again.
+        $this->logIn(1);
+        $body = $this->render('handleRequest', ['id' => 1]);
+
+        self::assertSame(1, substr_count($body, 'Currently delivered'));
+        self::assertGreaterThan(strpos($body, 'http://localhost/fr/'), strpos($body, 'Currently delivered'));
+    }
+
+    #[Test]
     public function languagesTheEditorMayNotAccessAreLeftOut(): void
     {
         $this->logIn(2);

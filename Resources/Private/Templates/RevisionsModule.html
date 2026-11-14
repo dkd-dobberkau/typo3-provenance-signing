@@ -35,7 +35,10 @@
                             <tbody>
                                 <f:for each="{rows}" as="row">
                                     <tr>
-                                        <td><a href="{row.detailUrl}"><f:format.date format="Y-m-d H:i:s">@{row.revision.signed_at}</f:format.date></a></td>
+                                        <td>
+                                            <a href="{row.detailUrl}"><f:format.date format="Y-m-d H:i:s">@{row.revision.signed_at}</f:format.date></a>
+                                            <f:if condition="{row.current}"> <span class="badge badge-info"><f:translate key="{ll}current"/></span></f:if>
+                                        </td>
                                         <td>{row.language}</td>
                                         <td><code>{row.hash}</code></td>
                                         <td><span class="badge badge-success">L{row.revision.cps_conformance}</span></td>

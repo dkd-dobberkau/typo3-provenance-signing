@@ -57,7 +57,7 @@ final readonly class RevisionRepository
         $queryBuilder = $this->forPage($pageUid, $languageUids);
 
         return $queryBuilder
-            ->select('uid', 'page_uid', 'language_uid', 'document_uri', 'content_hash', 'key_id', 'cps_conformance', 'signed_record', 'request_kind', 'request_url', 'signed_at')
+            ->select('uid', 'page_uid', 'language_uid', 'document_uri', 'content_hash', 'record_hash', 'key_id', 'cps_conformance', 'signed_record', 'request_kind', 'request_url', 'signed_at')
             ->orderBy('signed_at', 'DESC')
             ->addOrderBy('uid', 'DESC')
             ->setFirstResult($offset)

@@ -13,6 +13,7 @@ use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\NormalizedParams;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequest;
+use TYPO3\TestingFramework\Core\Functional\Framework\Frontend\InternalRequestContext;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 final class RevisionLogTest extends FunctionalTestCase
@@ -103,6 +104,22 @@ final class RevisionLogTest extends FunctionalTestCase
         self::assertCount(0, $this->revisions());
         self::assertCount(1, $this->getConnectionPool()->getConnectionForTable('tx_provenancesigning_record')
             ->select(['uid'], 'tx_provenancesigning_record')->fetchAllAssociative());
+    }
+
+    #[Test]
+    public function renderForALoggedInFrontendUserIsNotLogged(): void
+    {
+        $this->getConnectionPool()->getConnectionForTable('fe_users')
+            ->insert('fe_users', ['uid' => 1, 'pid' => 1, 'username' => 'member', 'password' => 'x', 'usergroup' => '']);
+        $this->useTypoScript('page.typoscript');
+
+        $response = $this->executeFrontendSubRequest(
+            new InternalRequest('http://localhost/'),
+            (new InternalRequestContext())->withFrontendUserId(1)
+        );
+
+        self::assertSame(200, $response->getStatusCode());
+        self::assertCount(0, $this->revisions());
     }
 
     #[Test]

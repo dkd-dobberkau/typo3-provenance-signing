@@ -40,7 +40,8 @@ before, a revision is kept in `tx_provenancesigning_revision`: content hash,
 key, level, the full signed record, the canonical text it was signed over and
 the request that produced the render (HTML or the Markdown version of
 b13/ai-bots-love-markdown, with the requested URL). Only cached renders in the
-live workspace are logged, so previews and logged-in renders stay out.
+live workspace for visitors without a frontend login are logged, so previews
+and renders for logged-in members stay out.
 Re-signing identical bytes after a cache flush adds nothing.
 
 The log is internal: the backend submodule **Provenance → Revisions** lists the

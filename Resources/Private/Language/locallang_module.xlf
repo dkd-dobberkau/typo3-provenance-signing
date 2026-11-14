@@ -15,6 +15,7 @@
             <trans-unit id="column.level"><source>Level</source></trans-unit>
             <trans-unit id="column.request"><source>Request</source></trans-unit>
             <trans-unit id="column.changes"><source>Changed against previous</source></trans-unit>
+            <trans-unit id="current"><source>Currently delivered</source></trans-unit>
             <trans-unit id="firstRevision"><source>First revision</source></trans-unit>
             <trans-unit id="request.html"><source>HTML</source></trans-unit>
             <trans-unit id="request.markdown"><source>Markdown</source></trans-unit>

@@ -6,6 +6,8 @@ namespace CmsProvenance\ProvenanceSigning\Backend\Controller;
 
 use CmsProvenance\Provenance\Backend\Controller\PagesModuleController;
 use CmsProvenance\ProvenanceSigning\Domain\Repository\RevisionRepository;
+use CmsProvenance\ProvenanceSigning\Domain\Repository\SignedRecordRepository;
+use CmsProvenance\ProvenanceSigning\Revision\RevisionLog;
 use CmsProvenance\ProvenanceSigning\Revision\RevisionChanges;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -36,6 +38,8 @@ final readonly class RevisionsModuleController
         private RevisionChanges $revisionChanges,
         private DiffUtility $diffUtility,
         private SiteFinder $siteFinder,
+        private SignedRecordRepository $signedRecordRepository,
+        private RevisionLog $revisionLog,
     ) {}
 
     public function handleRequest(ServerRequestInterface $request): ResponseInterface
@@ -48,6 +52,8 @@ final readonly class RevisionsModuleController
         $pages = max(1, (int)ceil($total / self::PER_PAGE));
         $page = min(max(1, (int)($request->getQueryParams()['page'] ?? 1)), $pages);
 
+        // After A, B, A the newest revision is B, but the site delivers A again.
+        $current = array_map($this->revisionLog->recordHash(...), $pageRecord !== [] ? $this->signedRecordRepository->findForPage($pageId) : []);
         $rows = [];
         foreach ($this->revisionRepository->findForPage($pageId, $languages, ($page - 1) * self::PER_PAGE, self::PER_PAGE) as $revision) {
             $previous = $this->revisionRepository->previousOf($revision);
@@ -56,6 +62,7 @@ final readonly class RevisionsModuleController
                 'hash' => $this->shortHash((string)$revision['content_hash']),
                 'language' => $this->languageTitle($pageId, (int)$revision['language_uid']),
                 'first' => $previous === null,
+                'current' => ($current[(int)$revision['language_uid']] ?? null) === $revision['record_hash'],
                 'changes' => implode(', ', $this->revisionChanges->between($previous, $revision)),
                 'detailUrl' => $this->url('provenance_revisions.detail', ['id' => $pageId, 'revision' => $revision['uid']]),
             ];

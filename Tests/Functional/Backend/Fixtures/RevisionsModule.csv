@@ -11,7 +11,10 @@
 ,2,0,"Outside",1,1,31,1
 "tx_provenancesigning_revision"
 ,"uid","page_uid","language_uid","document_uri","content_hash","record_hash","key_id","cps_conformance","signed_record","canonical_text","request_kind","request_url","signed_at"
-,1,1,0,"urn:uuid:1","sha256:aaaaaaaa11","1111","key-1",4,"{""headline"":""Root""}","Old text","html","http://localhost/",1778749200
-,2,1,0,"urn:uuid:1","sha256:bbbbbbbb22","2222","key-1",4,"{""headline"":""Root, revised""}","<script>alert(1)</script> new text","markdown","http://localhost/index.md",1778752800
+,1,1,0,"urn:uuid:1","sha256:aaaaaaaa11","52a5ea65346b77549a8e70c5c12133a819c49802aa60eb65c389038100c044f9","key-1",4,"{""headline"":""Root""}","Old text","html","http://localhost/",1778749200
+,2,1,0,"urn:uuid:1","sha256:bbbbbbbb22","044b5bd037334737a2adb69c0f02bc29dc4cec7b1d88ee34191a7c2636bfa0ea","key-1",4,"{""headline"":""Root, revised""}","<script>alert(1)</script> new text","markdown","http://localhost/index.md",1778752800
 ,3,1,1,"urn:uuid:1","sha256:cccccccc33","3333","key-1",4,"{""headline"":""Racine""}","Texte","html","http://localhost/fr/",1778750000
 ,4,2,0,"urn:uuid:2","sha256:dddddddd44","4444","key-1",4,"{}","Outside text","html","http://localhost/outside",1778753000
+"tx_provenancesigning_record"
+,"uid","page_uid","language_uid","document_uri","content_hash","key_id","signed_record","signed_at"
+,1,1,0,"urn:uuid:1","sha256:aaaaaaaa11","key-1","{""headline"":""Root""}",1778760000

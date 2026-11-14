@@ -31,9 +31,7 @@ final readonly class RevisionLog
     public function record(ServerRequestInterface $request, int $pageUid, int $languageUid, SignedPage $signedPage): bool
     {
         $record = $signedPage->record;
-        // Annex A.4 bytes, without the signature; Ed25519 is deterministic, so
-        // equal bytes mean an equal signed record.
-        $recordHash = hash('sha256', $this->jsonCanonicalizer->canonicalizeRecord($record));
+        $recordHash = $this->recordHash($record);
         if ($this->revisionRepository->hasRecord($pageUid, $languageUid, $recordHash)) {
             return false;
         }
@@ -54,6 +52,15 @@ final readonly class RevisionLog
         ]);
 
         return true;
+    }
+
+    /**
+     * SHA-256 over the Annex A.4 bytes, without the signature; Ed25519 is
+     * deterministic, so equal hashes mean an equal signed record.
+     */
+    public function recordHash(\stdClass $record): string
+    {
+        return hash('sha256', $this->jsonCanonicalizer->canonicalizeRecord($record));
     }
 
     /**

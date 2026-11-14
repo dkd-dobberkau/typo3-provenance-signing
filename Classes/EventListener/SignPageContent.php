@@ -82,8 +82,9 @@ final readonly class SignPageContent
     }
 
     /**
-     * Only what the public is served: cached renders in the live workspace.
-     * Previews and logged-in renders are not cached and stay out of the log.
+     * Only what the public is served: cached renders in the live workspace,
+     * without a frontend login. Previews are not cached; renders for logged-in
+     * frontend users are cached per user group, so they are excluded explicitly.
      */
     private function keepRevision(AfterCacheableContentIsGeneratedEvent $event, SignedPage $signedPage): void
     {
@@ -92,6 +93,7 @@ final readonly class SignPageContent
         if (!$event->isCachingEnabled()
             || !$pageInformation instanceof PageInformation
             || (int)$this->context->getPropertyFromAspect('workspace', 'id', 0) !== 0
+            || (bool)$this->context->getPropertyFromAspect('frontend.user', 'isLoggedIn', false)
         ) {
             return;
         }

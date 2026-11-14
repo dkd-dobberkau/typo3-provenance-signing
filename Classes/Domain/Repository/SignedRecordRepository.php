@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CmsProvenance\ProvenanceSigning\Domain\Repository;
 
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 
 /**
@@ -36,5 +37,31 @@ final readonly class SignedRecordRepository
                 $connection->insert(self::TABLE, $row + $identifier);
             }
         });
+    }
+
+    /**
+     * The signed record each language of a page currently delivers.
+     *
+     * @return array<int, \stdClass> by language uid
+     */
+    public function findForPage(int $pageUid): array
+    {
+        $queryBuilder = $this->connectionPool->getQueryBuilderForTable(self::TABLE);
+        $rows = $queryBuilder
+            ->select('language_uid', 'signed_record')
+            ->from(self::TABLE)
+            ->where($queryBuilder->expr()->eq('page_uid', $queryBuilder->createNamedParameter($pageUid, Connection::PARAM_INT)))
+            ->executeQuery()
+            ->fetchAllAssociative();
+
+        $records = [];
+        foreach ($rows as $row) {
+            $record = json_decode((string)$row['signed_record'], false);
+            if ($record instanceof \stdClass) {
+                $records[(int)$row['language_uid']] = $record;
+            }
+        }
+
+        return $records;
     }
 }
