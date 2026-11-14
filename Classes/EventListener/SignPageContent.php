@@ -6,10 +6,13 @@ namespace CmsProvenance\ProvenanceSigning\EventListener;
 
 use CmsProvenance\Provenance\Service\AbsoluteUrlResolver;
 use CmsProvenance\ProvenanceSigning\Domain\Repository\SignedRecordRepository;
+use CmsProvenance\ProvenanceSigning\Revision\RevisionLog;
 use CmsProvenance\ProvenanceSigning\Signing\PageSigner;
+use CmsProvenance\ProvenanceSigning\Signing\SignedPage;
 use CmsProvenance\ProvenanceSigning\WellKnown\KeysHandler;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Attribute\AsEventListener;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -33,6 +36,8 @@ final readonly class SignPageContent
         private SignedRecordRepository $signedRecordRepository,
         private LoggerInterface $logger,
         private AbsoluteUrlResolver $urlResolver,
+        private RevisionLog $revisionLog,
+        private Context $context,
     ) {}
 
     public function __invoke(AfterCacheableContentIsGeneratedEvent $event): void
@@ -55,6 +60,7 @@ final readonly class SignPageContent
             }
             $this->setContent($event, $signedPage->html);
             $this->storeForAudit($event, $signedPage->record);
+            $this->keepRevision($event, $signedPage);
         } catch (\Throwable $exception) {
             // An unsigned page is still a valid L2 page; never break delivery over a signature.
             $this->logger->error('Provenance signing failed: ' . $exception->getMessage(), ['exception' => $exception]);
@@ -73,6 +79,29 @@ final readonly class SignPageContent
                 $signedRecord
             );
         }
+    }
+
+    /**
+     * Only what the public is served: cached renders in the live workspace.
+     * Previews and logged-in renders are not cached and stay out of the log.
+     */
+    private function keepRevision(AfterCacheableContentIsGeneratedEvent $event, SignedPage $signedPage): void
+    {
+        $request = $event->getRequest();
+        $pageInformation = $request->getAttribute('frontend.page.information');
+        if (!$event->isCachingEnabled()
+            || !$pageInformation instanceof PageInformation
+            || (int)$this->context->getPropertyFromAspect('workspace', 'id', 0) !== 0
+        ) {
+            return;
+        }
+        $language = $request->getAttribute('language');
+        $this->revisionLog->record(
+            $request,
+            $pageInformation->getId(),
+            $language instanceof SiteLanguage ? $language->getLanguageId() : 0,
+            $signedPage
+        );
     }
 
     // TYPO3 14 passes the content on the event, TYPO3 13 on the frontend controller.

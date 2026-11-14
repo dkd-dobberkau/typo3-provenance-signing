@@ -17,3 +17,9 @@ services:
     public: true
   CmsProvenance\ProvenanceSigning\Command\ListKeysCommand:
     public: true
+
+  # Public for the backend module of this extension and for tests
+  CmsProvenance\ProvenanceSigning\Revision\RevisionLog:
+    public: true
+  CmsProvenance\ProvenanceSigning\Signing\PageSigner:
+    public: true
