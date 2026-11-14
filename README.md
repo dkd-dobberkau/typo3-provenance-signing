@@ -33,6 +33,22 @@ Content that is not cacheable (`USER_INT`) is inserted after signing. Keep it
 outside the content area or mark it with `data-cps-ignore`, otherwise the
 delivered text no longer matches the signed hash.
 
+### Revision log
+
+Every time a page and language are signed with a record they never had
+before, a revision is kept in `tx_provenancesigning_revision`: content hash,
+key, level, the full signed record, the canonical text it was signed over and
+the request that produced the render (HTML or the Markdown version of
+b13/ai-bots-love-markdown, with the requested URL). Only cached renders in the
+live workspace are logged, so previews and logged-in renders stay out.
+Re-signing identical bytes after a cache flush adds nothing.
+
+The log is internal: the backend submodule **Provenance → Revisions** lists the
+revisions of the selected page and shows one revision with its record and a
+diff of its text against the revision before it. Nothing is published. Rows are
+never changed or deleted, and there is no cleanup yet; the table grows with
+every new record.
+
 ## Usage
 
 ```bash

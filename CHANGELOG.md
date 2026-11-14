@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- Revision log: each new signed record of a page and language is kept in
+  `tx_provenancesigning_revision` with its canonical text and the request
+  that produced it (HTML or Markdown); only cached live renders. Backend
+  submodule Provenance → Revisions lists them and shows record and text diff.
 - Documentation pointing to the manual of the core extension (milestone M7).
 - The latest signed record per page and language is stored in
   `tx_provenancesigning_record` for the audit endpoint.
