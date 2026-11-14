@@ -48,6 +48,19 @@ final class PageSignerTest extends UnitTestCase
     }
 
     #[Test]
+    public function signedPageCarriesTheCanonicalTextItHashed(): void
+    {
+        $store = new KeyStore($this->directory);
+        $store->generate();
+        $html = $this->page('<p>Signed claim</p>');
+
+        $signed = $this->pageSigner($store)->signPage($html, self::KEY_BASE);
+
+        self::assertSame((new CanonicalText())->extract($html), $signed->canonicalText);
+        self::assertSame('sha256:' . hash('sha256', $signed->canonicalText), $signed->record->contentHash);
+    }
+
+    #[Test]
     public function changingTheTextAfterSigningBreaksVerification(): void
     {
         $store = new KeyStore($this->directory);

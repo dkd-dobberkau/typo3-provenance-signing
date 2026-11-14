@@ -59,7 +59,8 @@ final readonly class PageSigner
             true,
             $auditEndpoint
         );
-        $record->contentHash = $this->canonicalText->contentHash($html);
+        $canonicalText = $this->canonicalText->extract($html);
+        $record->contentHash = 'sha256:' . hash('sha256', $canonicalText);
 
         $signed = $this->recordSigner->sign($record, $key->keyId, $this->keyStore->secretKey($key->keyId));
         $json = json_encode(
@@ -69,7 +70,8 @@ final readonly class PageSigner
 
         return new SignedPage(
             str_replace($fullMatch, '<script type="application/ld+json">' . $json . '</script>', $html),
-            $signed
+            $signed,
+            $canonicalText
         );
     }
 
